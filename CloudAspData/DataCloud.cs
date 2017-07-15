@@ -99,6 +99,7 @@ namespace CloudAspData
         {
             var fileDb = Context.Files.FirstOrDefault(file => file.Id == id);
             if (fileDb != null) Context.Files.Remove(fileDb);
+            Context.SaveChanges();
         }
     }
 }

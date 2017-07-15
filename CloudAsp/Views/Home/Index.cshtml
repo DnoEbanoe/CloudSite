@@ -6,34 +6,27 @@
 }
 
 <script>
-    function removeFile(fileId, roomId) {
+    function removeFile(fileId1, roomId) {
         debugger;
+        //var data = ;
         $.ajax({
             type: "POST",
-            url: '@Url.Action("RemoveFile", "Home")' + "?id = " + fileId + "&roomId = " + roomId,
-            contentType: false,
-            processData: false,
-            success: function (result) {
+            url: '@Url.Action("RemoveFile", "Home")',
+            dataType: "json",
+            contentType: 'application/json; charset=UTF-8',
+            data: "{ id: '" + fileId1 + "', roomId: '" + roomId + "' }",
+            complete: function (result) {
                 debugger;
                 var container = document.getElementById("filesList");
-                container.innerHTML = result;
+                container.innerHTML = result.responseText;
             },
-            error: function (xhr, status, p3) {
-                alert(xhr.responseText);
-            }
+            //error: function (xhr, status, p3) {
+            //    alert(xhr.responseText);
+            //}
         });
-
-        function Azaza()
-        {
-            alert("azazaza");
-        }
+    };
 
 
-    }
-
-</script>
-
-<script>
     function ElementsIsUnique(files) {
 
         var filesByRoom = document.getElementsByClassName("fineName");
@@ -49,10 +42,8 @@
         return true;
     }
 
-    
-
     function uploadFileToServer(files) {
-        
+
         if (!ElementsIsUnique(files))
             return;
         ShowLoadElem();
@@ -61,7 +52,7 @@
         for (var i = 0; i < files.length; i++) {
             data.append("file" + i, files[i]);
         }
-        
+
         $.ajax({
             type: "POST",
             url: '@Url.Action("UploadFile", "Home", new { roomId = $"{Model.Id}"} )',
@@ -76,7 +67,7 @@
 
             },
             error: function (xhr, status, p3) {
-                HideLoadElem();   
+                HideLoadElem();
                 alert(xhr.responseText);
             }
         });
@@ -85,7 +76,7 @@
     function onChangeFile() {
         debugger;
         var files = document.getElementById("inputFile").files;
-        
+
         if (files.length > 0) {
             uploadFileToServer(files);
             document.getElementById("inputFile").value = "";
@@ -93,7 +84,7 @@
     }
 
     function drop_handler(ev) {
-        
+
         console.log("Drop");
         ev.preventDefault();
         // If dropped items aren't files, reject them
@@ -102,19 +93,19 @@
         debugger;
         if (dt.items) {
             // Use DataTransferItemList interface to access the file(s)
-            for (var i=0; i < dt.items.length; i++) {
+            for (var i = 0; i < dt.items.length; i++) {
                 if (dt.items[i].kind == "file") {
                     var f = dt.items[i].getAsFile();
                     files.push(f);
                 }
             }
-            if(files.length > 0)
+            if (files.length > 0)
                 uploadFileToServer(files);
         } else {
             // Use DataTransfer interface to access the file(s)
-            for (var i=0; i < dt.files.length; i++) {
+            for (var i = 0; i < dt.files.length; i++) {
                 console.log("... file[" + i + "].name = " + dt.files[i].name);
-            }  
+            }
         }
     }
     function dragover_handler(ev) {

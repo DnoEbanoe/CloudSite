@@ -50,8 +50,13 @@ namespace CloudAsp.Controllers
         {
             var id = Guid.Parse(roomId);
             var room = _data.RoomById(id);
+            Guid? userId = null;
+            if(User.Identity.IsAuthenticated)
+            {
+                userId = _data.GetClient(User.Identity.Name)?.Id;
+            }
             if (room == null)
-                _data.AddRoom(new Room { Id = id, DataCreated = DateTime.Now });
+                _data.AddRoom(new Room { Id = id, DataCreated = DateTime.Now, ClientId = userId });
             foreach (string file in Request.Files)
             {
                 HttpPostedFileBase upload = Request.Files[file];
