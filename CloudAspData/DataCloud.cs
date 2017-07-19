@@ -99,6 +99,12 @@ namespace CloudAspData
         {
             var fileDb = Context.Files.FirstOrDefault(file => file.Id == id);
             if (fileDb != null) Context.Files.Remove(fileDb);
+            Context.SaveChanges();
+        }
+
+        public Room[] GetRoomsByUser(Guid clientId)
+        {
+            return Context.Rooms.Where(room => room.ClientId == clientId).AsNoTracking().ToArray();
         }
     }
 }

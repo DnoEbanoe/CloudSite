@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
 using CloudAsp.Models;
+using CloudAsp.Models.Client;
 using CloudAspData;
 using CloudAspData.Entity;
 
@@ -19,10 +20,15 @@ namespace CloudAsp.Controllers
         {
             _data = data;
         }
-        // GET: Client
+        
         public ActionResult Index()
         {
-            return null;
+            if (!User.Identity.IsAuthenticated)
+                return View("Error");
+           
+            var client = _data.GetClient(User.Identity.Name);
+            client.Rooms = _data.GetRoomsByUser(client.Id).ToList();
+            return View(client);
         }
 
         public bool CheckUniqueEmail()

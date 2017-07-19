@@ -1,0 +1,53 @@
+﻿@model CloudAspData.Entity.Client
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Профіль</h2>
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-6">
+           <img src="~/Resourses/Image/man-1116385_960_720.png" class="img-thumbnail elemMaxSize"/>
+        </div>
+        <div class="col-sm-6">
+            <div>
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i> Ім'я</span>
+                    <input type="text" class="form-control" placeholder="Ім'я" disabled="disabled" value="@Model.FirstName" />
+                </div>
+            </div>
+            <div>
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i> Фамілія</span>
+                    <input type="text" class="form-control" placeholder="Фамілія" disabled="disabled" value="@Model.LastName" />
+                </div>
+            </div>
+            <div>
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i> По батькові</span>
+                    <input type="text" class="form-control" placeholder="По батькові" disabled="disabled" value="@Model.MiddleName" />
+                </div>
+            </div>
+            <div>
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i> Логін</span>
+                    <input type="text" class="form-control" placeholder="Логін" disabled="disabled" value="@Model.Email" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <h2>Кабінети</h2>
+        @foreach (var room in Model.Rooms)
+        {
+
+            var roomUrl = Request.Url?.Scheme + "://" + Request.Url?.Authority + Url.Action("Index", "Home", new {id = room.Id.ToString()});
+
+            <div class="col-sm-6">
+                <a href="@roomUrl" class="btn btn-success" style="margin: 2px;">@roomUrl</a>
+            </div>
+        }
+    </div>
+</div>
+
