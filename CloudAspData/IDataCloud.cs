@@ -25,5 +25,6 @@ namespace CloudAspData
         void RemoveRoom(Func<Room, bool> where);
         File FileById(Guid id);
         void RemoveFile(Guid id);
+        Room[] GetRoomsByUser(Guid clientId);
     }
 }

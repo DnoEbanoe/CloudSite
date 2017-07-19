@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title</title>
     <link href="@Url.Content("~/Content/Footer.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
@@ -33,11 +34,11 @@
                         <li class="dropdown">
                             <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"></span><span class="userText"> @Html.GetUser(User.Identity.Name)</span><span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a href="#">Профіль</a></li>
-                                @if (User.IsInRole("Admin"))
+                                <li>@Html.ActionLink("Профіль", "Index", "Client")</li>
+                                @*@if (User.IsInRole("Admin"))
                                 {
                                     <li>@Html.ActionLink("Новини", "Administration", "News")</li>
-                                }
+                                }*@
                                 <li>@Html.ActionLink("Вийти", "ExitUser", "Client")</li>
                             </ul>
                         </li>

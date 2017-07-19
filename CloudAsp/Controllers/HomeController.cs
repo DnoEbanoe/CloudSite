@@ -27,7 +27,7 @@ namespace CloudAsp.Controllers
                 Timer = new Timer(state =>
                 {
                     _data.RemoveRoom(room => (room.DataCreated.AddDays((int)room.DaysRemove) > DateTime.Now));
-                }, null, 0, (int)TimeSpan.FromMinutes(5).TotalMilliseconds); ;
+                }, null, 0, (int)TimeSpan.FromMinutes(5).TotalMilliseconds);
             }
         }
         public ActionResult Index(string id)

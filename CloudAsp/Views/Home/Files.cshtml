@@ -4,10 +4,10 @@
     Layout = null;
 }
 <style>
-    .elem-work {
+    /*.elem-work {
         margin: 0;
         padding: 2px 3px 2px 3px;
-    }
+    }*/
     .elem-work a {
         color: white;
     }
@@ -18,6 +18,7 @@
         foreach (var file in Model)
         {
             var path = string.Empty;
+            var fileName = file.Name.Length > 30 ? file.Name.Remove(30) + "..." : file.Name;
             var size = "col-sm-3";
             if (file.FileType == FileType.Rar)
             {
@@ -67,31 +68,25 @@
                     </div>
                     <div class="panel-body">
                         <div class="row">
-                            <div class="col-sm-10">
-                                <h5 class="fineName">@file.Name</h5>
+                            <div class="col-sm-8">
+                                <h5 class="fineName">@fileName</h5>
                             </div>
-                            <div class="col-sm-1">
-                                <button class="btn btn-primary elem-work">
-                                    <a href="@Url.Action("DownloadFile", "Home", new {id = file.Id.ToString()})">
-                                        <span class="glyphicon glyphicon-arrow-down"></span>
-                                    </a>
-                                </button>
+                            <div class="col-sm-4">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <button class="btn btn-primary elem-work">
+                                            <a href="@Url.Action("DownloadFile", "Home", new {id = file.Id.ToString()})">
+                                                <span class="glyphicon glyphicon-arrow-down center-block"></span>
+                                            </a>
+                                        </button>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <button class="btn btn-primary elem-work" onclick="removeFile('@file.Id.ToString()','@file.RoomId.ToString()')">
+                                            <span class="glyphicon glyphicon-remove center-block"></span>
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="col-sm-1">
-                                @*<a href="@Url.Action("RemoveFile", "Home", new {id = file.Id.ToString(), roomId = @file.RoomId.ToString()})">
-                                    <button class="btn btn-primary elem-work">
-
-                                        <span class="glyphicon glyphicon-remove"></span>
-
-                                    </button>
-                                </a>*@
-                                    <button class="btn btn-primary elem-work" onclick="removeFile('@file.Id.ToString()','@file.RoomId.ToString()')">
-
-                                        <span class="glyphicon glyphicon-remove"></span>
-
-                                    </button>
-                            </div>
-
                         </div>
                     </div>
                 </div>

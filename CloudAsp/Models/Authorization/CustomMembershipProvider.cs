@@ -10,7 +10,7 @@ namespace CloudAsp.Models.Authorization
         IDataCloud DataBase { get; set; } = new DataCloud();
         public override bool ValidateUser(string username, string password)
         {
-            Client user = DataBase.Authorisation(username, password);
+            CloudAspData.Entity.Client user = DataBase.Authorisation(username, password);
             return user != null;
         }
 

@@ -175,6 +175,7 @@
     <Compile Include="Models\Authorisation.cs" />
     <Compile Include="Models\Authorization\CustomMembershipProvider.cs" />
     <Compile Include="Models\Authorization\CustomRoleProvider.cs" />
+    <Compile Include="Models\Client\ClientInfo.cs" />
     <Compile Include="Models\Cloud\CloudModel.cs" />
     <Compile Include="Models\Cloud\FileModel.cs" />
     <Compile Include="Models\News\CreateNews.cs" />
@@ -197,6 +198,7 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Resourses\Image\image.png" />
+    <Content Include="Resourses\Image\man-1116385_960_720.png" />
     <Content Include="Resourses\Image\news.png" />
     <Content Include="Resourses\Image\rar.png" />
     <Content Include="ApplicationInsights.config">
@@ -243,6 +245,7 @@
     <Content Include="Views\Home\Files.cshtml" />
     <Content Include="Views\News\Index.cshtml" />
     <Content Include="Views\News\GetNews.cshtml" />
+    <Content Include="Views\Client\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
